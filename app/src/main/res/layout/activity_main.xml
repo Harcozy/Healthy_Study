@@ -20,15 +20,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="264dp"
-        android:layout_height="102dp"
-        android:layout_marginTop="416dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="432dp"
         android:fontFamily="@font/Advetime"
         android:text="@string/app_name"
         android:textSize="60sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Healthy Study"
