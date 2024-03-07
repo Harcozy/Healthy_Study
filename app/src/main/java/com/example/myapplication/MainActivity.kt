@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         val startButton: ImageButton = findViewById(R.id.imageButton)
         startButton.setOnClickListener {
             // Navigate to the Main Screen Activity
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
     }
