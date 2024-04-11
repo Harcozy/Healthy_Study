@@ -3,15 +3,24 @@ package com.example.myapplication
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class SecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        setupDateDisplay()
         val textView3: TextView = findViewById(R.id.textView3)
         textView3.text = "${getGreeting()}, ${getUsername()}"
+    }
+
+    private fun setupDateDisplay() {
+        val tvDate = findViewById<TextView>(R.id.tvDate)
+        val currentDate = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("dd MM yyyy", Locale.getDefault())
+        tvDate.text = dateFormat.format(currentDate)
     }
 
     private fun getGreeting(): String {

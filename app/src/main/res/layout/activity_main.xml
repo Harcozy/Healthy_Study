@@ -31,12 +31,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054" />
 
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="263dp"
+        android:layout_height="52dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/buffalo"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.203" />
+
     <com.example.myapplication.Clockie
         android:id="@+id/analogClock"
-        android:layout_width="255dp"
-        android:layout_height="243dp"
+        android:layout_width="234dp"
+        android:layout_height="237dp"
         android:layout_centerInParent="true"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="194dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.384" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
