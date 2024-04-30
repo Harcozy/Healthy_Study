@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="title_image_description" />
+    <string name="error_message">Error: %1$s</string>
+    <string name="fetch_quotes_failed">Failed to fetch quotes</string>
+    <string name="no_quotes_available">No quotes available.</string>
+
 </resources>

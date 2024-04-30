@@ -29,22 +29,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.047" />
+
 
     <TextView
         android:id="@+id/tvDate"
-        android:layout_width="263dp"
-        android:layout_height="52dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="215dp"
+        android:layout_height="39dp"
         android:fontFamily="@font/buffalo"
         android:gravity="center"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.203" />
+        app:layout_constraintVertical_bias="0.206" />
+
+    <TextView
+        android:id="@+id/tvQuote"
+        android:layout_width="315dp"
+        android:layout_height="156dp"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.819" />
 
     <com.example.myapplication.Clockie
         android:id="@+id/analogClock"
@@ -56,6 +71,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384" />
+        app:layout_constraintVertical_bias="0.368" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
