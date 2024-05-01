@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
+        supportActionBar?.hide()
+
         val startButton: ImageButton = findViewById(R.id.imageButton)
         startButton.setOnClickListener {
             // Navigate to the Main Screen Activity

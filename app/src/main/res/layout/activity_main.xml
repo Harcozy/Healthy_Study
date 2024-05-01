@@ -1,81 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="437dp"
+            android:layout_height="161dp"
+            android:background="@drawable/elem1"
+            app:layout_constraintBottom_toTopOf="@+id/tvDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+            <!-- Add toolbar items here -->
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="382dp"
+            android:layout_height="422dp"
+            android:layout_marginTop="652dp"
+            android:background="@drawable/elem2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!-- Add toolbar items here -->
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="280dp"
+            android:layout_height="49dp"
+            android:fontFamily="@font/buffalo"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="215dp"
+            android:layout_height="39dp"
+            android:fontFamily="@font/buffalo"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.159" />
+
+        <TextView
+            android:id="@+id/tvQuote"
+            android:layout_width="352dp"
+            android:layout_height="61dp"
+            android:fontFamily="@font/merriweather"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.086" />
+
+        <com.example.myapplication.Clockie
+            android:id="@+id/analogClock"
+            android:layout_width="211dp"
+            android:layout_height="216dp"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.255" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="80dp"
+            android:layout_height="73dp"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.435"
+            app:srcCompat="@drawable/focus_ico" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="88dp"
+            android:layout_height="82dp"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.434"
+            app:srcCompat="@drawable/class_ico" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="75dp"
+            android:layout_height="73dp"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.434"
+            app:srcCompat="@drawable/track_ico" />
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="77dp"
+            android:layout_height="78dp"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.062"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.555"
+            app:srcCompat="@drawable/health_ico" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="81dp"
+            android:layout_height="77dp"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.969"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.557"
+            app:srcCompat="@drawable/res_ico" />
+
+        <ImageButton
+            android:id="@+id/imageButton6"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="89dp"
+            android:layout_height="75dp"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.557"
+            app:srcCompat="@drawable/cal_ico" />
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="412dp"
-        android:layout_height="214dp"
-        android:background="@drawable/elem1"
-        app:layout_constraintBottom_toTopOf="@+id/tvDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-        <!-- Add toolbar items here -->
-    </androidx.appcompat.widget.Toolbar>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="280dp"
-        android:layout_height="49dp"
-        android:fontFamily="@font/buffalo"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="215dp"
-        android:layout_height="39dp"
-        android:fontFamily="@font/buffalo"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.252" />
-
-    <TextView
-        android:id="@+id/tvQuote"
-        android:layout_width="352dp"
-        android:layout_height="61dp"
-        android:fontFamily="@font/merriweather"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
-
-    <com.example.myapplication.Clockie
-        android:id="@+id/analogClock"
-        android:layout_width="234dp"
-        android:layout_height="237dp"
-        android:layout_centerInParent="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

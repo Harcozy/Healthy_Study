@@ -19,6 +19,8 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.hide()
+
         setupDateTimeDisplay()
         val textView3: TextView = findViewById(R.id.textView3)
         textView3.text = "${getGreeting()}, ${getUsername()}"
@@ -64,6 +66,7 @@ class SecondActivity : AppCompatActivity() {
     private fun getUsername(): String {
         return "User"
     }
+
     private fun fetchQuote() {
         lifecycleScope.launch {
             try {
@@ -88,7 +91,6 @@ class SecondActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun updateQuote(quote: Quote) {
         val tvQuote: TextView = findViewById(R.id.tvQuote)
