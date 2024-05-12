@@ -28,6 +28,7 @@ class SecondActivity : AppCompatActivity() {
         fetchQuote()
     }
 
+
     private fun setupDateTimeDisplay() {
         val tvDate = findViewById<TextView>(R.id.tvDate)
         val currentDate = Calendar.getInstance().time
@@ -103,6 +104,21 @@ class SecondActivity : AppCompatActivity() {
             putLong("lastQuoteTime", System.currentTimeMillis())
             apply()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // here onBack pressed method deprecated so, how can solve this problem
+        // top right corner onBackPressed deprecated problem solve
+
+
+
+        // here any animation code add
+        // here you can change animation activity
+        this@SecondActivity.overridePendingTransition(
+            R.anim.animate_fade_enter,
+            R.anim.animate_fade_exit
+        )
     }
 }
 
