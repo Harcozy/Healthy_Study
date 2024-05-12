@@ -12,11 +12,12 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val startButton: ImageButton = findViewById(R.id.imageButton)
-        startButton.setOnClickListener {
-            // Navigate to the Main Screen Activity
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
-        }
+        findViewById<ImageButton>(R.id.startbut1).setOnClickListener {
+            startActivity(Intent(this, SecondActivity::class.java))
+            this@MainActivity.overridePendingTransition(
+                R.anim.animate_zoom_enter,
+                R.anim.animate_zoom_exit
+            )
+        } 
     }
 }
