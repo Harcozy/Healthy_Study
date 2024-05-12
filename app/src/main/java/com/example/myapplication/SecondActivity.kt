@@ -108,13 +108,7 @@ class SecondActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        // here onBack pressed method deprecated so, how can solve this problem
-        // top right corner onBackPressed deprecated problem solve
 
-
-
-        // here any animation code add
-        // here you can change animation activity
         this@SecondActivity.overridePendingTransition(
             R.anim.animate_fade_enter,
             R.anim.animate_fade_exit
