@@ -1,7 +1,9 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +13,6 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-
 
 
 class SecondActivity : AppCompatActivity() {
@@ -26,6 +27,12 @@ class SecondActivity : AppCompatActivity() {
         textView3.text = "${getGreeting()}, ${getUsername()}"
 
         fetchQuote()
+
+        val button: ImageButton = findViewById(R.id.imageButton)
+        button.setOnClickListener {
+            val intent = Intent(this, FocusActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
