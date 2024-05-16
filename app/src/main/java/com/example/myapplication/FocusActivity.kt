@@ -4,13 +4,13 @@ package com.example.myapplication
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Crossfade
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.ui.CountdownScreen
@@ -26,6 +26,8 @@ class FocusActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_focus)
 
+        supportActionBar?.hide()
+
         val composeView = findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
             MyTheme(darkTheme = false) {
@@ -38,16 +40,15 @@ class FocusActivity : AppCompatActivity() {
 @Preview
 @Composable
 fun MyApp() {
-
     var timeInSec = 0
 
-    Surface(color = MaterialTheme.colors.background) {
+    Surface(color = Color.Transparent) {
         var screen by remember { mutableStateOf(Screen.Input) }
 
         Crossfade(targetState = screen, label = "") {
             when (it) {
-                Screen.Input -> InputScreen2 {
-                    timeInSec = it
+                Screen.Input -> InputScreen2 { it1 ->
+                    timeInSec = it1
                     screen = Screen.Countdown
                 }
                 Screen.Countdown -> CountdownScreen(timeInSec) {
