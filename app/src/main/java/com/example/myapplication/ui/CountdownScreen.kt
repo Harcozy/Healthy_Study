@@ -1,11 +1,13 @@
-
 package com.example.myapplication.ui
 
-import androidx.compose.animation.core.LinearEasing
+import android.Manifest
+import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
@@ -21,12 +23,14 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,6 +45,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -49,6 +54,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.example.myapplication.R
 import com.example.myapplication.ui.HMSFontInfo.Companion.HMS
 import com.example.myapplication.ui.HMSFontInfo.Companion.MS
@@ -56,23 +64,75 @@ import com.example.myapplication.ui.HMSFontInfo.Companion.S
 import com.example.myapplication.ui.theme.purple200
 import com.example.myapplication.ui.theme.teal200
 import com.example.myapplication.ui.theme.typography
+import kotlinx.coroutines.delay
+
+const val MY_PERMISSIONS_REQUEST_VIBRATE = 1
+
+fun sendNotification(context: Context) {
+    val channelId = "break_time_channel"
+    val notificationId = 1
+
+    // Create a notification channel for Android Oreo and above
+    val name = "Break Time Channel"
+    val descriptionText = "Channel for Break Time notification"
+    val importance = NotificationManager.IMPORTANCE_DEFAULT
+    val channel = NotificationChannel(channelId, name, importance).apply {
+        description = descriptionText
+    }
+
+    // Register the channel with the system
+    val notificationManager: NotificationManager =
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    notificationManager.createNotificationChannel(channel)
+
+    // Build the notification
+    val builder = NotificationCompat.Builder(context, channelId)
+        .setSmallIcon(R.drawable.ic_launcher_foreground)
+        .setContentTitle("Break Time")
+        .setContentText("It's time for a break!")
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+    // Check if the VIBRATE permission is already granted
+    if (ContextCompat.checkSelfPermission(context, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
+        // Permission is not granted
+        if (context is Activity && ActivityCompat.shouldShowRequestPermissionRationale(context, Manifest.permission.VIBRATE)) {
+            // Show an explanation to the user. This is asynchronous and should not block.
+            // After the user sees the explanation, try again to request the permission.
+        } else {
+            // No explanation needed, request the permission.
+            if (context is Activity) {
+                ActivityCompat.requestPermissions(context, arrayOf(Manifest.permission.VIBRATE), MY_PERMISSIONS_REQUEST_VIBRATE)
+            }
+        }
+    } else {
+        // Permission has already been granted
+        notificationManager.notify(notificationId, builder.build())
+    }
+}
 
 @Composable
 fun CountdownScreen(
     timeInSec: Int,
+    context: Context,
     onCancel: () -> Unit
 ) {
+    var remainingTime by remember { mutableStateOf(timeInSec) }
+    var showDialog by remember { mutableStateOf(false) }
 
-    var trigger by remember { mutableStateOf(timeInSec) }
+    LaunchedEffect(timeInSec) {
+        while (remainingTime > 0) {
+            delay(1000L)
+            remainingTime--
+        }
+        showDialog = true
+        sendNotification(context)
+    }
 
-    val elapsed by animateIntAsState(
-        targetValue = trigger * 1000,
-        animationSpec = tween(timeInSec * 1000, easing = LinearEasing)
-    )
-
-    DisposableEffect(Unit) {
-        trigger = 0
-        onDispose { }
+    if (showDialog) {
+        BreakTimeDialog(onDismiss = {
+            showDialog = false
+            onCancel()  // Navigate back to the input screen
+        })
     }
 
     Column(
@@ -80,11 +140,9 @@ fun CountdownScreen(
             .fillMaxHeight()
             .padding(start = 10.dp, end = 10.dp)
     ) {
-
-
         Box {
-            AnimationElapsedTime(elapsed)
-            AnimationCircleCanvas(elapsed)
+            AnimationElapsedTime(remainingTime)
+            AnimationCircleCanvas(remainingTime, timeInSec)
         }
 
         Spacer(modifier = Modifier.size(55.dp))
@@ -106,25 +164,37 @@ fun CountdownScreen(
             text = "Your quote here",
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(top = 25.dp),
-            style = typography.h6.copy(fontSize = 40.sp, fontFamily = customFont),
+                .padding(top = 15.dp),
+            style = typography.h6.copy(fontSize = 30.sp, fontFamily = customFont),
         )
     }
 }
 
 @Composable
-private fun BoxScope.AnimationElapsedTime(elapsed: Int) {
+fun BreakTimeDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(text = "Break Time!")
+        },
+        text = {
+            Text("It's time for a break!")
+        },
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text("OK")
+            }
+        }
+    )
+}
 
-    val (hou, min, sec) = remember(elapsed / 1000) {
-        val elapsedInSec = elapsed / 1000
-        val hou = elapsedInSec / 3600
-        val min = elapsedInSec / 60 - hou * 60
-        val sec = elapsedInSec % 60
+@Composable
+private fun BoxScope.AnimationElapsedTime(remainingTime: Int) {
+    val (hou, min, sec) = remember(remainingTime) {
+        val hou = remainingTime / 3600
+        val min = (remainingTime % 3600) / 60
+        val sec = remainingTime % 60
         Triple(hou, min, sec)
-    }
-
-    val mills = remember(elapsed) {
-        elapsed % 1000
     }
 
     val onlySec = remember(hou, min) {
@@ -169,41 +239,25 @@ private fun BoxScope.AnimationElapsedTime(elapsed: Int) {
         DisplayTime(
             if (onlySec) sec.toString() else sec.formatTime(),
             if (onlySec) "" else "s",
-            fontSize = size * (if (onlySec && sec < 10 && mills != 0) animatedFont else 1f),
+            fontSize = size * (if (onlySec && sec < 10) animatedFont else 1f),
             labelSize = labelSize,
             textAlign = if (onlySec) TextAlign.Center else TextAlign.End
         )
     }
-
-    Text(
-        ".${(mills / 10).formatTime()}",
-        Modifier
-            .align(Alignment.BottomCenter)
-            .padding(bottom = 80.dp),
-        fontSize = 30.sp,
-        fontFamily = FontFamily.Cursive,
-        style = typography.subtitle1,
-        color = MaterialTheme.colors.primary,
-    )
 }
 
 @Composable
-private fun BoxScope.AnimationCircleCanvas(durationMills: Int) {
+private fun BoxScope.AnimationCircleCanvas(remainingTime: Int, totalTime: Int) {
+    val progress = remember(remainingTime) {
+        1f - remainingTime / totalTime.toFloat()
+    }
+
+    val strokeRestart = Stroke(15f)
+    val strokeReverse = Stroke(10f)
+    val color = MaterialTheme.colors.primary
+    val secondColor = MaterialTheme.colors.secondary
+
     val transition = rememberInfiniteTransition()
-    var trigger by remember { mutableStateOf(0f) }
-    var isFinished by remember { mutableStateOf(false) }
-
-    val animateTween by animateFloatAsState(
-        targetValue = trigger,
-        animationSpec = tween(
-            durationMillis = durationMills,
-            easing = LinearEasing
-        ),
-        finishedListener = {
-            isFinished = true
-        }
-    )
-
     val animatedRestart by transition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
@@ -215,15 +269,6 @@ private fun BoxScope.AnimationCircleCanvas(durationMills: Int) {
         animationSpec = infiniteRepeatable(tween(2000), RepeatMode.Reverse)
     )
 
-    DisposableEffect(Unit) {
-        trigger = 360f
-        onDispose {}
-    }
-
-    val strokeRestart = Stroke(15f)
-    val strokeReverse = Stroke(10f)
-    val color = MaterialTheme.colors.primary
-    val secondColor = MaterialTheme.colors.secondary
     Canvas(
         modifier = Modifier
             .align(Alignment.Center)
@@ -235,28 +280,25 @@ private fun BoxScope.AnimationCircleCanvas(durationMills: Int) {
         val topLeftOffset = Offset(10f, 10f)
         val size = Size(radius * 2, radius * 2)
 
-        if (!isFinished) {
-
-            drawArc(
-                color = color,
-                startAngle = animatedRestart,
-                sweepAngle = 150f,
-                topLeft = topLeftOffset,
-                size = size,
-                useCenter = false,
-                style = strokeRestart,
-            )
-        }
+        drawArc(
+            color = color,
+            startAngle = animatedRestart,
+            sweepAngle = 150f,
+            topLeft = topLeftOffset,
+            size = size,
+            useCenter = false,
+            style = strokeRestart,
+        )
 
         drawCircle(
             color = secondColor,
             style = strokeReverse,
-            radius = radius * if (isFinished) 1f else animatedReverse
+            radius = radius * animatedReverse
         )
 
         drawArc(
             startAngle = 270f,
-            sweepAngle = animateTween,
+            sweepAngle = progress * 360f,
             brush = Brush.radialGradient(
                 radius = radius,
                 colors = listOf(
@@ -274,7 +316,8 @@ private fun BoxScope.AnimationCircleCanvas(durationMills: Int) {
 @Preview
 @Composable
 fun DisplayPreview() {
-    CountdownScreen(1000) {}
+    val context = LocalContext.current
+    CountdownScreen(1000, context) {}
 }
 
 private fun Int.formatTime() = String.format("%02d", this)
