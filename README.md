@@ -4,9 +4,9 @@ Healthy Study is a small application written in Kotlin, designed to help student
 
 Features: (Since this application is still on an early stage of development, most features do not work or not working properly)
 - Focus Clock
-  . Countdown Timer
-  . Pomodoro Timer
-  . Stopwatch
+  - Countdown Timer
+  - Pomodoro Timer
+  - Stopwatch
 - Google Classroom integrated
 - Assessment Tracker
 - Health Hub
