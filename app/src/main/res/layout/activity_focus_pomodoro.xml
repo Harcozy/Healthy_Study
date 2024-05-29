@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f8ff"
+    tools:context=".PomodoroActivity">
+
+    <!-- Existing UI elements -->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="282dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Pomodoro Timer"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/setFocusTimeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.727" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="410dp"
+        android:layout_height="62dp"
+        android:background="@drawable/elem1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.019">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="82dp"
+        android:layout_height="54dp"
+        android:background="@null"
+        android:contentDescription="A button to Pomo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021"
+        app:srcCompat="@drawable/count_ico" />
+
+    <ImageButton
+        android:id="@+id/pomotab"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="82dp"
+        android:layout_height="59dp"
+        android:background="@null"
+        android:contentDescription="A button to focus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/pom_click" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="82dp"
+        android:layout_height="59dp"
+        android:background="@null"
+        android:contentDescription="A button to focus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022"
+        app:srcCompat="@drawable/stop_ico" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="443dp"
+        android:layout_height="73dp"
+        android:background="@drawable/elem3"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/home2_ico"
+            style="@android:style/Widget.ImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/title_image_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/home_ico" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/setBreakTimeLayout"
+        android:layout_width="413dp"
+        android:layout_height="96dp"
+        android:layout_marginBottom="450dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setFocusTimeLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/setBreakTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set break time"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <SeekBar
+            android:id="@+id/breakTimeSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="60"
+            android:progress="20" />
+
+        <TextView
+            android:id="@+id/breakTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="0:20:00"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sessionsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setBreakTimeLayout">
+
+        <TextView
+            android:id="@+id/sessionsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sessions"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/decreaseSessionsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sessionsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="4"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/increaseSessionsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Start"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sessionsLayout" />
+
+    <TextView
+        android:id="@+id/countdownText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="48sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Pause"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/countdownText" />
+
+    <Button
+        android:id="@+id/resumeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Resume"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/countdownText" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Stop"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resumeButton" />
+
+    <FrameLayout
+        android:id="@+id/dialogLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.8"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialogMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Focus session completed! Take a break."
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/okButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@android:color/darker_gray"
+                android:text="OK"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/setFocusTimeLayout"
+        android:layout_width="421dp"
+        android:layout_height="58dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/setBreakTimeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.5">
+
+        <TextView
+            android:id="@+id/setFocusTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set focus time"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <SeekBar
+            android:id="@+id/focusTimeSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="120"
+            android:progress="60" />
+
+        <TextView
+            android:id="@+id/focusTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="1:00:00"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

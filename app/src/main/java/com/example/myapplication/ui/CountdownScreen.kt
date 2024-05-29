@@ -73,7 +73,7 @@ fun sendNotification(context: Context) {
     val notificationId = 1
 
     // Create a notification channel for Android Oreo and above
-    val name = "Break Time Channel"
+    val name = "Session Ended Channel"
     val descriptionText = "Channel for Break Time notification"
     val importance = NotificationManager.IMPORTANCE_DEFAULT
     val channel = NotificationChannel(channelId, name, importance).apply {
@@ -88,7 +88,7 @@ fun sendNotification(context: Context) {
     // Build the notification
     val builder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.drawable.ic_launcher_foreground)
-        .setContentTitle("Break Time")
+        .setContentTitle("Session Ended!")
         .setContentText("It's time for a break!")
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
@@ -322,7 +322,7 @@ fun DisplayPreview() {
 
 private fun Int.formatTime() = String.format("%02d", this)
 
-private data class HMSFontInfo(val fontSize: TextUnit, val labelSize: TextUnit, val padding: Dp) {
+data class HMSFontInfo(val fontSize: TextUnit, val labelSize: TextUnit, val padding: Dp) {
     companion object {
         val HMS = HMSFontInfo(50.sp, 20.sp, 40.dp)
         val MS = HMSFontInfo(85.sp, 30.sp, 50.dp)

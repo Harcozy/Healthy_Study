@@ -36,5 +36,7 @@
 
         <activity android:name=".FocusActivity" />
 
+        <activity android:name=".PomodoroActivity" />
+
     </application>
 </manifest>

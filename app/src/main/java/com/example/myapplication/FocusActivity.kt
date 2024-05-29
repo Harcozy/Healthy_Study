@@ -1,7 +1,11 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Crossfade
 import androidx.compose.material.Surface
@@ -24,18 +28,34 @@ enum class Screen {
     Input, Countdown
 }
 
-class FocusActivity : AppCompatActivity() {
+class FocusActivity() : AppCompatActivity(), Parcelable {
+    constructor(parcel: Parcel) : this() {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_focus)
+        setContentView(R.layout.activity_focus_countdown)
 
         supportActionBar?.hide()
 
+        // Initialize Compose view
         val composeView = findViewById<ComposeView>(R.id.compose_view)
         composeView.setContent {
             MyTheme(darkTheme = false) {
                 MyApp()
             }
+        }
+
+        findViewById<ImageButton>(R.id.pomotab).setOnClickListener {
+            startActivity(Intent(this, PomodoroActivity::class.java))
+        }
+
+        findViewById<ImageButton>(R.id.home2_ico).setOnClickListener {//This sets an onClickListener on the start button.
+            startActivity(Intent(this, SecondActivity::class.java))
+            this@FocusActivity.overridePendingTransition(
+                R.anim.animate_zoom_enter,
+                R.anim.animate_zoom_exit
+            )
         }
     }
 
@@ -55,9 +75,25 @@ class FocusActivity : AppCompatActivity() {
             // Handle other permission results
         }
     }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<FocusActivity> {
+        override fun createFromParcel(parcel: Parcel): FocusActivity {
+            return FocusActivity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<FocusActivity?> {
+            return arrayOfNulls(size)
+        }
+    }
 }
 
-@Preview
 @Composable
 fun MyApp() {
     var timeInSec by remember { mutableStateOf(0) }
