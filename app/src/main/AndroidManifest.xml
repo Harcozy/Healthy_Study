@@ -36,6 +36,10 @@
 
         <activity android:name=".FocusActivity" />
 
+        <activity android:name=".SubjectMarksAdapter" />
+
+        <activity android:name=".InputActivity" />
+
         <activity android:name=".PomodoroActivity" />
 
     </application>

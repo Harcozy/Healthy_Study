@@ -22,6 +22,7 @@ class SecondActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+
         setupDateTimeDisplay()
         val textView3: TextView = findViewById(R.id.textView3)
         textView3.text = "${getGreeting()}, ${getUsername()}"
@@ -31,6 +32,12 @@ class SecondActivity : AppCompatActivity() {
         val button: ImageButton = findViewById(R.id.imageButton)
         button.setOnClickListener {
             val intent = Intent(this, FocusActivity::class.java)
+            startActivity(intent)
+        }
+
+        val button2: ImageButton = findViewById(R.id.imageButton3)
+        button2.setOnClickListener {
+            val intent = Intent(this, InputActivity::class.java)
             startActivity(intent)
         }
     }

@@ -22,10 +22,10 @@ class Clockie @JvmOverloads constructor(
         strokeCap = Paint.Cap.ROUND
     }
 
-    private val calendar = Calendar.getInstance()
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+        val calendar = Calendar.getInstance()
 
         val centerX = width / 2f
         val centerY = height / 2f
@@ -43,7 +43,6 @@ class Clockie @JvmOverloads constructor(
             val speckleY = Random.nextFloat() * (2 * radius) + (centerY - radius)
             canvas.drawCircle(speckleX, speckleY, 2f, paint)
         }
-
 
         // Draw the outer rim of the clock
         paint.color = Color.parseColor("#AEC6CF") // Blue-ish outer rim color
@@ -73,10 +72,10 @@ class Clockie @JvmOverloads constructor(
         canvas.drawCircle(centerX, centerY, 12f, paint)
 
         // Schedule a view update
-        postInvalidateDelayed(1000)
+        postInvalidateOnAnimation()
     }
 
-    private fun drawHand(canvas: Canvas, cx: Float, cy: Float, angle: Float, length: Float, strokeWidth:Float) {
+    private fun drawHand(canvas: Canvas, cx: Float, cy: Float, angle: Float, length: Float, strokeWidth: Float) {
         paint.strokeWidth = strokeWidth
         val handEnd = calculateHandEndPoint(cx, cy, angle, length)
         canvas.drawLine(cx, cy, handEnd.x, handEnd.y, paint)
@@ -86,7 +85,6 @@ class Clockie @JvmOverloads constructor(
         val angleRadians = Math.toRadians(angle.toDouble() - 90)
         val x = (cx + cos(angleRadians) * length).toFloat()
         val y = (cy + sin(angleRadians) * length).toFloat()
-        return PointF(x,y)
+        return PointF(x, y)
     }
 }
-

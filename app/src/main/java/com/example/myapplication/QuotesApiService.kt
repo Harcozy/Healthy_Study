@@ -11,7 +11,7 @@ import retrofit2.http.Headers
 interface QuotesApiService {
     // This is a method that makes a GET request to the "quotes?category=education" endpoint of your API. The @Headers annotation adds a header to the request.
     @Headers("X-Api-Key:3vV5cpjHGA3WSZFgxmSe6Q==tYdyLlXgiyCPdMNA")
-    @GET("quotes?category=education")
+    @GET("quotes?category=inspirational")
     // The suspend keyword means that this method is a suspending function, which can be paused and resumed at a later time.
     // This allows it to perform long-running operations, like network requests, without blocking the main thread.
     suspend fun getEducationQuotes(): Response<List<Quote>>
