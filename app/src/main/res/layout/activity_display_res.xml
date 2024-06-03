@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".InputActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="327dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/title_image_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/track_title" />
+
     <EditText
         android:id="@+id/subjectInput"
         android:layout_width="0dp"

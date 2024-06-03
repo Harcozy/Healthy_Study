@@ -57,7 +57,6 @@ import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import com.example.myapplication.NetworkService
 import com.example.myapplication.R
 import com.example.myapplication.ui.HMSFontInfo.Companion.HMS
 import com.example.myapplication.ui.HMSFontInfo.Companion.MS
@@ -65,9 +64,7 @@ import com.example.myapplication.ui.HMSFontInfo.Companion.S
 import com.example.myapplication.ui.theme.purple200
 import com.example.myapplication.ui.theme.teal200
 import com.example.myapplication.ui.theme.typography
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 
 const val MY_PERMISSIONS_REQUEST_VIBRATE = 1
 
@@ -121,17 +118,11 @@ fun CountdownScreen(
 ) {
     var remainingTime by remember { mutableStateOf(timeInSec) }
     var showDialog by remember { mutableStateOf(false) }
-    var quote by remember { mutableStateOf("Fetching quote...") }
 
     LaunchedEffect(timeInSec) {
         while (remainingTime > 0) {
             delay(1000L)
             remainingTime--
-
-            // Fetch a new quote every 10 seconds
-            if (remainingTime % 10 == 0) {
-                quote = fetchQuote(context)
-            }
         }
         showDialog = true
         sendNotification(context)
@@ -170,11 +161,11 @@ fun CountdownScreen(
         val customFont = FontFamily(Font(resId = R.font.merriweather))
 
         Text(
-            text = quote,
+            text = "Your quote here",
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(top = 15.dp),
-            style = typography.h6.copy(fontSize = 15.sp, fontFamily = customFont),
+            style = typography.h6.copy(fontSize = 30.sp, fontFamily = customFont),
         )
     }
 }
@@ -336,25 +327,5 @@ data class HMSFontInfo(val fontSize: TextUnit, val labelSize: TextUnit, val padd
         val HMS = HMSFontInfo(50.sp, 20.sp, 40.dp)
         val MS = HMSFontInfo(85.sp, 30.sp, 50.dp)
         val S = HMSFontInfo(150.sp, 50.sp, 55.dp)
-    }
-}
-
-// Fetch a quote function
-private suspend fun fetchQuote(context: Context): String {
-    return try {
-        val response = withContext(Dispatchers.IO) {
-            NetworkService.quotesApi.getEducationQuotes()
-        }
-        if (response.isSuccessful && response.body() != null) {
-            val quotes = response.body()!!
-            val randomQuote = quotes.randomOrNull()
-            randomQuote?.let {
-                "\"${it.quote}\" - ${it.author ?: "Unknown"}"
-            } ?: "No quotes available."
-        } else {
-            context.getString(R.string.fetch_quotes_failed)
-        }
-    } catch (e: Exception) {
-        context.getString(R.string.error_message, e.localizedMessage)
     }
 }
