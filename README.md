@@ -1,8 +1,8 @@
-### Application Overview
+### Software Design and Development Task 3 - Develop a Solution Package
 
 **Name:** Healthy Study
 
-**Description:** Healthy Study is designed to help users manage their tasks efficiently. It includes features such as task creation, reminders, and a productivity tracker.
+**Description:** Healthy Study is a small application written in Kotlin, designed to help students balance their health and academic responsibilities. Recognising the challenges students face in managing their time effectively between studying and maintaining a healthy lifestyle, Healthy Study aims to provide a comprehensive tool that supports both academic progress and personal well-being. .
 
 ### Hardware Requirements
 
