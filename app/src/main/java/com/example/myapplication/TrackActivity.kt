@@ -1,13 +1,17 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.tracker.SubjectMarks
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-class InputActivity : AppCompatActivity() {
+class TrackActivity : AppCompatActivity() {
 
     private lateinit var subjectInput: EditText
     private lateinit var marksInput: EditText
@@ -31,6 +35,8 @@ class InputActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        loadSubjectMarks()
+
         addButton.setOnClickListener {
             addMarks()
         }
@@ -48,6 +54,28 @@ class InputActivity : AppCompatActivity() {
             subjectMarksList.add(SubjectMarks(subject, marks))
         }
 
+        adapter.notifyDataSetChanged()
+        saveSubjectMarks()
+    }
+
+    private fun saveSubjectMarks() {
+        val sharedPref = getSharedPreferences("AppPref", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        val gson = Gson()
+        val json = gson.toJson(subjectMarksList)
+        editor.putString("subjectMarksList", json)
+        editor.apply()
+    }
+
+    private fun loadSubjectMarks() {
+        val sharedPref = getSharedPreferences("AppPref", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPref.getString("subjectMarksList", null)
+        val type = object : TypeToken<MutableList<SubjectMarks>>() {}.type
+        if (json != null) {
+            val list: MutableList<SubjectMarks> = gson.fromJson(json, type)
+            subjectMarksList.addAll(list)
+        }
         adapter.notifyDataSetChanged()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.tracker
 
 data class SubjectMarks(
     val subject: String,

@@ -51,7 +51,7 @@ class FocusActivity() : AppCompatActivity(), Parcelable {
         }
 
         findViewById<ImageButton>(R.id.home2_ico).setOnClickListener {//This sets an onClickListener on the start button.
-            startActivity(Intent(this, SecondActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             this@FocusActivity.overridePendingTransition(
                 R.anim.animate_zoom_enter,
                 R.anim.animate_zoom_exit

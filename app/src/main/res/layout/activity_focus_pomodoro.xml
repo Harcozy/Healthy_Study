@@ -94,23 +94,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/home2_ico"
-            style="@android:style/Widget.ImageButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:contentDescription="@string/title_image_description"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar3"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/home_ico" />
-
-
     </androidx.appcompat.widget.Toolbar>
+
+    <ImageButton
+        android:id="@+id/home2_ico"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="67dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="4dp"
+        android:background="@null"
+        android:contentDescription="@string/title_image_description"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/home_ico" />
+
+    <ImageButton
+        android:id="@+id/art_ico"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="70dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="4dp"
+        android:background="@null"
+        android:contentDescription="@string/title_image_description"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/article_ico" />
+
+    <ImageButton
+        android:id="@+id/set_ico"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="70dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="4dp"
+        android:background="@null"
+        android:contentDescription="@string/title_image_description"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/set_ico" />
 
     <LinearLayout
         android:id="@+id/setBreakTimeLayout"
