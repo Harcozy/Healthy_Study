@@ -49,3 +49,52 @@
 - **Material Components:** `com.google.android.material:material:1.12.0`
 - **JUnit:** `junit:junit:4.13.2`
 - **Espresso:** `androidx.test.espresso:espresso-core:3.5.1`
+
+###	Setting up Source Code in Android Studio
+
+0.	Prerequisite
+
+o	Ensure you have the latest version of Android Studio installed.
+o	Ensure you have Git installed for cloning the repository 
+(Optional since you can just download the source code directly from Github)
+
+1.	Clone the Repository (If Git is installed)
+
+o	Open a terminal or command prompt.
+o	Navigate to the directory where you want to clone the repository.
+o	Run the following command to clone the repository:
+```
+git clone https://github.com/Harcozy/Healthy_Study.git
+```
+
+2.	Open the project in Android Studio
+
+o	Launch Android Studio
+o	Click on ‘File’ > “Open…”
+o	Navigate to the cloned repository directory and select it.
+o	Click “OK” to open the project.
+
+3.	Configure the project
+
+o	Android Studio will automatically start syncing the project. If not, click on ‘File’  > ‘Sync Project with Gradle Files’
+o	Ensure all dependencies are downloaded and the project is built successfully.
+
+4.	Set up an Android Emulator or Connect a Device
+
+o	To run the app, you can either use an Android Emulator or connect a physical device.
+o	For setting up an Emulator:
+
+•	Go to ‘Tools’ > ‘AVD Manager’
+•	Create a new virtual device and follow the prompts to set it up.
+(Remember to match the Specification)
+
+o	For using a Physical Device:
+
+•	Enable ‘Developer Options’ and ‘USB Debugging’ on your device.
+•	Connect your device to the computer via USB.
+
+5.	Run the app
+
+o	Once the setup is complete, you can run the app by clicking the ‘Run’ button (Green play button) in the tool bar.
+o	Select the target device (emulator or connected device) and click ‘OK’
+
