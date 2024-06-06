@@ -50,6 +50,12 @@ class FocusActivity() : AppCompatActivity(), Parcelable {
             startActivity(Intent(this, PomodoroActivity::class.java))
         }
 
+        val settingtab: ImageButton = findViewById(R.id.set_ico)
+        settingtab.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
+
         findViewById<ImageButton>(R.id.home2_ico).setOnClickListener {//This sets an onClickListener on the start button.
             startActivity(Intent(this, MainActivity::class.java))
             this@FocusActivity.overridePendingTransition(

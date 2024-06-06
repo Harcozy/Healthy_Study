@@ -1,10 +1,12 @@
 package com.example.myapplication
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -15,6 +17,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -25,11 +28,13 @@ class PomodoroActivity : AppCompatActivity() {
     private lateinit var focusTimeText: TextView
     private lateinit var breakTimeText: TextView
     private lateinit var sessionsCount: TextView
-    private lateinit var startButton: Button
+    private lateinit var startButton: ImageButton // Ensure this is ImageButton
     private lateinit var pauseButton: Button
     private lateinit var resumeButton: Button
     private lateinit var stopButton: Button
     private lateinit var countdownText: TextView
+    private lateinit var increaseSessionButton : ImageButton
+    private lateinit var decreaseSessionsButton : ImageButton
     private var focusTimeInMillis: Long = 3600000 // 1 hour
     private var breakTimeInMillis: Long = 1200000 // 20 minutes
     private var sessionCount = 4
@@ -45,6 +50,16 @@ class PomodoroActivity : AppCompatActivity() {
             startActivity(Intent(this, FocusActivity::class.java))
         }
 
+        val home_but: ImageButton = findViewById(R.id.home2_ico)
+        home_but.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+
+            this@PomodoroActivity.overridePendingTransition(
+                R.anim.animate_zoom_enter,
+                R.anim.animate_zoom_exit
+            )
+        }
+
         supportActionBar?.hide()
 
         focusTimeSeekBar = findViewById(R.id.focusTimeSeekBar)
@@ -52,8 +67,10 @@ class PomodoroActivity : AppCompatActivity() {
         focusTimeText = findViewById(R.id.focusTimeText)
         breakTimeText = findViewById(R.id.breakTimeText)
         sessionsCount = findViewById(R.id.sessionsCount)
-        startButton = findViewById(R.id.startButton)
+        startButton = findViewById(R.id.startButton) // Ensure this is an ImageButton in both XML and code
         pauseButton = findViewById(R.id.pauseButton)
+        increaseSessionButton = findViewById(R.id.increaseSessionsButton)
+        decreaseSessionsButton = findViewById(R.id.decreaseSessionsButton)
         resumeButton = findViewById(R.id.resumeButton)
         stopButton = findViewById(R.id.stopButton)
         countdownText = findViewById(R.id.countdownText)
@@ -83,12 +100,12 @@ class PomodoroActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        findViewById<Button>(R.id.increaseSessionsButton).setOnClickListener {
+        increaseSessionButton.setOnClickListener {
             sessionCount++
             sessionsCount.text = sessionCount.toString()
         }
 
-        findViewById<Button>(R.id.decreaseSessionsButton).setOnClickListener {
+        decreaseSessionsButton.setOnClickListener {
             if (sessionCount > 1) {
                 sessionCount--
                 sessionsCount.text = sessionCount.toString()
@@ -126,8 +143,8 @@ class PomodoroActivity : AppCompatActivity() {
         findViewById<View>(R.id.setFocusTimeLabel).visibility = visibility
         findViewById<View>(R.id.setBreakTimeLabel).visibility = visibility
         findViewById<View>(R.id.sessionsLabel).visibility = visibility
-        findViewById<View>(R.id.increaseSessionsButton).visibility = visibility
-        findViewById<View>(R.id.decreaseSessionsButton).visibility = visibility
+        increaseSessionButton.visibility = visibility
+        decreaseSessionsButton.visibility = visibility
         countdownText.visibility = if (show) View.GONE else View.VISIBLE
         pauseButton.visibility = if (show) View.GONE else View.VISIBLE
         resumeButton.visibility = if (show) View.GONE else View.GONE
@@ -244,6 +261,12 @@ class PomodoroActivity : AppCompatActivity() {
     }
 
     private fun showNotification(message: String) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // Request the permission if it's not granted
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+            return
+        }
+
         val intent = Intent(this, PomodoroActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -281,5 +304,18 @@ class PomodoroActivity : AppCompatActivity() {
         val minutes = (millis / (1000 * 60)) % 60
         val hours = (millis / (1000 * 60 * 60)) % 24
         return String.format("%02d:%02d:%02d", hours, minutes, seconds)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                // Permission was granted, show the notification
+                showNotification("Focus session completed! Take a break.")
+            } else {
+                // Permission denied, show a message to the user
+                showAlertDialog("Notification permission is required to receive notifications.", {})
+            }
+        }
     }
 }

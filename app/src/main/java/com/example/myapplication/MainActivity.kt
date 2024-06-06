@@ -30,6 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         fetchQuote()
 
+        val settingtab: ImageButton = findViewById(R.id.set_ico)
+        settingtab.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
+
         val button: ImageButton = findViewById(R.id.imageButton)
         button.setOnClickListener {
             val intent = Intent(this, FocusActivity::class.java)

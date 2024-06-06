@@ -121,7 +121,7 @@ fun CountdownScreen(
 ) {
     var remainingTime by remember { mutableStateOf(timeInSec) }
     var showDialog by remember { mutableStateOf(false) }
-    var quote by remember { mutableStateOf("Fetching quote...") }
+    var quote by remember { mutableStateOf("") }
 
     LaunchedEffect(timeInSec) {
         while (remainingTime > 0) {
@@ -129,8 +129,9 @@ fun CountdownScreen(
             remainingTime--
 
             // Fetch a new quote every 10 seconds
-            if (remainingTime % 10 == 0) {
-                quote = fetchQuote(context)
+            if (remainingTime % 5000 == 0) {
+                val fetchedQuote = fetchQuote(context)
+                quote = fetchedQuote
             }
         }
         showDialog = true
@@ -350,11 +351,11 @@ private suspend fun fetchQuote(context: Context): String {
             val randomQuote = quotes.randomOrNull()
             randomQuote?.let {
                 "\"${it.quote}\" - ${it.author ?: "Unknown"}"
-            } ?: "No quotes available."
+            } ?: ""
         } else {
-            context.getString(R.string.fetch_quotes_failed)
+            ""
         }
     } catch (e: Exception) {
-        context.getString(R.string.error_message, e.localizedMessage)
+        ""
     }
 }

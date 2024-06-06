@@ -42,5 +42,7 @@
 
         <activity android:name=".PomodoroActivity" />
 
+        <activity android:name=".SettingActivity" />
+
     </application>
 </manifest>
