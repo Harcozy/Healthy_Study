@@ -56,6 +56,12 @@ class FocusActivity() : AppCompatActivity(), Parcelable {
             startActivity(intent)
         }
 
+        val stoptab: ImageButton = findViewById(R.id.stoptab)
+        stoptab.setOnClickListener {
+            val intent = Intent(this, StopActivity::class.java)
+            startActivity(intent)
+        }
+
         findViewById<ImageButton>(R.id.home2_ico).setOnClickListener {//This sets an onClickListener on the start button.
             startActivity(Intent(this, MainActivity::class.java))
             this@FocusActivity.overridePendingTransition(

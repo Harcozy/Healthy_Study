@@ -2,9 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -35,14 +33,10 @@
         </activity>
 
         <activity android:name=".FocusActivity" />
-
-        <activity android:name=".SubjectMarksAdapter" />
-
         <activity android:name=".TrackActivity" />
-
         <activity android:name=".PomodoroActivity" />
-
         <activity android:name=".SettingActivity" />
+        <activity android:name=".StopActivity" />
 
     </application>
 </manifest>

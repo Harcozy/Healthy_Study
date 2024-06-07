@@ -71,7 +71,7 @@
         app:srcCompat="@drawable/pom_click" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/stoptab"
         style="@android:style/Widget.ImageButton"
         android:layout_width="82dp"
         android:layout_height="59dp"

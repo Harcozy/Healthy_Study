@@ -55,6 +55,12 @@ class PomodoroActivity : AppCompatActivity() {
             startActivity(Intent(this, FocusActivity::class.java))
         }
 
+        val stoptab: ImageButton = findViewById(R.id.stoptab)
+        stoptab.setOnClickListener {
+            val intent = Intent(this, StopActivity::class.java)
+            startActivity(intent)
+        }
+
         // Set up home button to navigate back to main activity
         val homeBut: ImageButton = findViewById(R.id.home2_ico)
         homeBut.setOnClickListener {

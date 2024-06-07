@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="#f5f8ff"
-    tools:context=".PomodoroActivity">
+    tools:context=".StopActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -123,5 +123,60 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022"
         app:srcCompat="@drawable/stop_click" />
+
+    <TextView
+        android:id="@+id/stopwatch_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textSize="48sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/toolbar3" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        app:layout_constraintTop_toBottomOf="@id/stopwatch_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/toolbar3" />
+
+    <Button
+        android:id="@+id/stop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/stopwatch_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/toolbar3" />
+
+    <Button
+        android:id="@+id/pause_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pause"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/stopwatch_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/toolbar3" />
+
+    <Button
+        android:id="@+id/resume_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resume"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/stopwatch_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/toolbar3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
