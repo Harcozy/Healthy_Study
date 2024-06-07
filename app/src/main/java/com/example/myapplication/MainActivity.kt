@@ -15,21 +15,26 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-
 class MainActivity : AppCompatActivity() {
+    // Entry point for the activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Hide the action bar
         supportActionBar?.hide()
 
-
+        // Set up the date and time display
         setupDateTimeDisplay()
+
+        // Set the greeting message with the user's name
         val textView3: TextView = findViewById(R.id.textView3)
         textView3.text = "${getGreeting()}, ${getUsername()}"
 
+        // Fetch and display a quote
         fetchQuote()
 
+        // Set up navigation buttons
         val settingtab: ImageButton = findViewById(R.id.set_ico)
         settingtab.setOnClickListener {
             val intent = Intent(this, SettingActivity::class.java)
@@ -74,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Display a "coming soon" alert dialog for unfinished features
     private fun comingsoon() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Soooo Sorry!")
@@ -86,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    // Set up the current date and time display in the UI
     private fun setupDateTimeDisplay() {
         val tvDate = findViewById<TextView>(R.id.tvDate)
         val currentDate = Calendar.getInstance().time
@@ -94,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         tvDate.text = dateFormat.format(currentDate)
     }
 
+    // Get the appropriate suffix for the day of the month (e.g., "st", "nd", "rd", "th")
     private fun getDayOfMonthSuffix(n: Int): String {
         if (n in 1..31) {
             if (n in 11..13) {
@@ -109,6 +117,7 @@ class MainActivity : AppCompatActivity() {
         return ""
     }
 
+    // Get a greeting based on the current time of day
     private fun getGreeting(): String {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -121,10 +130,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Get the user's name (currently hardcoded as "User")
     private fun getUsername(): String {
         return "User"
     }
 
+    // Fetch a quote from the network and display it in the UI
     private fun fetchQuote() {
         lifecycleScope.launch {
             try {
@@ -150,6 +161,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Update the quote in the UI and store it in SharedPreferences
     private fun updateQuote(quote: Quote) {
         val tvQuote: TextView = findViewById(R.id.tvQuote)
         tvQuote.text = "\"${quote.quote}\" - ${quote.author ?: "Unknown"}"
@@ -162,6 +174,8 @@ class MainActivity : AppCompatActivity() {
             apply()
         }
     }
+
+    // Handle the back button press with a custom animation
     override fun onBackPressed() {
         super.onBackPressed()
 
@@ -171,4 +185,3 @@ class MainActivity : AppCompatActivity() {
         )
     }
 }
-
