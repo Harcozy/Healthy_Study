@@ -27,6 +27,32 @@ class SettingActivity : AppCompatActivity() { //This is the SettingActivity clas
         button7.setOnClickListener {
             comingsoon()
         }
+
+        val set1: ImageButton = findViewById(R.id.set1_button)
+        set1.setOnClickListener {
+            comingsoon()
+        }
+
+        val set2: ImageButton = findViewById(R.id.set2_button)
+        set2.setOnClickListener {
+            comingsoon()
+        }
+
+        val set3: ImageButton = findViewById(R.id.set3_button)
+        set3.setOnClickListener {
+            comingsoon()
+        }
+
+        val set4: ImageButton = findViewById(R.id.set4_button)
+        set4.setOnClickListener {
+            comingsoon()
+        }
+
+        val set5: ImageButton = findViewById(R.id.set5_button)
+        set5.setOnClickListener {
+            comingsoon()
+        }
+
     }
 
     private fun comingsoon() {

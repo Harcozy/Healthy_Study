@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
@@ -20,7 +19,7 @@ class TrackActivity : AppCompatActivity() {
     // UI components for input and displaying data
     private lateinit var subjectInput: EditText
     private lateinit var marksInput: EditText
-    private lateinit var addButton: Button
+    private lateinit var addButton: ImageButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SubjectMarksAdapter
     private val subjectMarksList = mutableListOf<SubjectMarks>()

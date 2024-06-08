@@ -41,14 +41,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subjectInput" />
 
-    <Button
+    <ImageButton
         android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Add"
+        android:layout_width="179dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="4dp"
+        android:background="@null"
         app:layout_constraintStart_toStartOf="@+id/marksInput"
-        app:layout_constraintTop_toBottomOf="@+id/marksInput" />
+        app:layout_constraintTop_toBottomOf="@+id/marksInput"
+        app:srcCompat="@drawable/add_mark" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
