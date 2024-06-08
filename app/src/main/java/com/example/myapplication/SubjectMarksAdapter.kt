@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,15 @@ class SubjectMarksAdapter(private val subjectMarksList: List<SubjectMarks>) :
         } else {
             // If the difference is zero, set the text to an empty string
             ""
+        }
+
+        // Set the color of the differenceTextView based on the value of difference
+        if (subjectMarks.difference > 0) {
+            holder.differenceTextView.setTextColor(Color.GREEN)
+        } else if (subjectMarks.difference < 0) {
+            holder.differenceTextView.setTextColor(Color.RED)
+        } else {
+            holder.differenceTextView.setTextColor(Color.BLACK)
         }
     }
 
