@@ -34,6 +34,10 @@ class TrackActivity : AppCompatActivity() {
         homebutton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            this@TrackActivity.overridePendingTransition(
+                R.anim.animate_zoom_enter,
+                R.anim.animate_zoom_exit
+            )
         }
 
         // Setting up settings button to navigate to SettingActivity
