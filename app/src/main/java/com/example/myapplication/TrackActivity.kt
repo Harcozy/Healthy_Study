@@ -63,7 +63,7 @@ class TrackActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        // Loading saved subject marks data
+        // Loading saved subject marks dat
         loadSubjectMarks()
 
         // Adding an onClickListener to the add button
