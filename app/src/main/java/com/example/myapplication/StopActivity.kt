@@ -13,10 +13,15 @@ import java.util.concurrent.TimeUnit
 
 class StopActivity : AppCompatActivity() {
 
+    // Binding object to access UI elements
     private lateinit var binding: ActivityFocusStopwatchBinding
+    // Variable to store the elapsed time in seconds
     private var timeInSeconds = 0L
+    // Boolean flag to indicate if the stopwatch is running
     private var isRunning = false
+    // Handler to manage the timing events on the main thread
     private val handler = Handler(Looper.getMainLooper())
+    // Runnable that increments the time every second and updates the UI
     private val runnable = object : Runnable {
         override fun run() {
             if (isRunning) {
@@ -27,11 +32,13 @@ class StopActivity : AppCompatActivity() {
         }
     }
 
+    // Called when the activity is first created
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFocusStopwatchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set click listeners for various buttons to navigate to other activities
         findViewById<ImageButton>(R.id.pomotab).setOnClickListener {
             startActivity(Intent(this, PomodoroActivity::class.java))
         }
@@ -57,8 +64,10 @@ class StopActivity : AppCompatActivity() {
             comingsoon()
         }
 
+        // Hide the action bar
         supportActionBar?.hide()
 
+        // Set click listeners for stopwatch control buttons
         binding.startButton.setOnClickListener {
             startStopwatch()
         }
@@ -76,6 +85,7 @@ class StopActivity : AppCompatActivity() {
         }
     }
 
+    // Function to show a "coming soon" dialog
     private fun comingsoon() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Soooo Sorry!")
@@ -88,12 +98,14 @@ class StopActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    // Function to start the stopwatch
     private fun startStopwatch() {
         isRunning = true
         timeInSeconds = 0L
         updateStopwatchView()
         handler.post(runnable)
 
+        // Update the visibility of the buttons and stopwatch display
         binding.startButton.isVisible = false
         binding.stopButton.isVisible = true
         binding.pauseButton.isVisible = true
@@ -101,12 +113,14 @@ class StopActivity : AppCompatActivity() {
         binding.stopwatchTime.isVisible = true
     }
 
+    // Function to stop the stopwatch
     private fun stopStopwatch() {
         isRunning = false
         handler.removeCallbacks(runnable)
         timeInSeconds = 0L
         updateStopwatchView()
 
+        // Update the visibility of the buttons and stopwatch display
         binding.startButton.isVisible = true
         binding.stopButton.isVisible = false
         binding.pauseButton.isVisible = false
@@ -114,24 +128,29 @@ class StopActivity : AppCompatActivity() {
         binding.stopwatchTime.isVisible = false
     }
 
+    // Function to pause the stopwatch
     private fun pauseStopwatch() {
         isRunning = false
         handler.removeCallbacks(runnable)
 
+        // Update the visibility of the buttons
         binding.pauseButton.isVisible = false
         binding.resumeButton.isVisible = true
         binding.stopButton.isVisible = true // Ensure stop button remains visible
     }
 
+    // Function to resume the stopwatch from a paused state
     private fun resumeStopwatch() {
         isRunning = true
         handler.post(runnable)
 
+        // Update the visibility of the buttons
         binding.pauseButton.isVisible = true
         binding.resumeButton.isVisible = false
         binding.stopButton.isVisible = true // Ensure stop button remains visible
     }
 
+    // Function to update the stopwatch display with the current time
     private fun updateStopwatchView() {
         val hours = TimeUnit.SECONDS.toHours(timeInSeconds)
         val minutes = TimeUnit.SECONDS.toMinutes(timeInSeconds) % 60
